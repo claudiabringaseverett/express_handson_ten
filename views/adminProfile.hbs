@@ -1,0 +1,16 @@
+<h1 id="adminProfile">Welcome, Admin!</h1>
+
+<div id="adminDescription">
+    <h2>Below is a list of all users</h2>
+    <br>
+    <p>Click on a user to view their information:</p>
+</div>
+
+{{#each users}}
+<div id="userList">
+    <a href="/users/admin/editUser/{{UserId}}">{{FirstName}} {{LastName}} </a>
+</div>{{/each}}
+
+<br>
+
+<a href="/users/logout">Log Out</a>

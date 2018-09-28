@@ -1,0 +1,44 @@
+<div id="postList">
+    <h1>{{PostTitle}}</h1>
+    <p>{{PostBody}}</p>
+</div>
+
+<script>
+    function onSubmit() {
+
+        const postTitle = document.getElementById('postTitle').value;
+        const postBody = document.getElementById('postBody').value;
+
+        $.ajax({
+            url: '/users/editPost/{{ PostId }}',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ postTitle: postTitle, postBody: postBody }),
+            method: 'PUT', complete: () => window.location.reload()
+        })
+    }
+
+    function onDelete() {
+        $.ajax({
+            url: '/users/editPost/{{PostId}}/delete',
+            method: 'DELETE', complete: () => window.location = "/users/profile/{{UserId}}"
+        })
+    }
+</script>
+
+<form onsubmit="onSubmit(); return false">
+    <div>
+        <label for="name">Post Title: </label>
+        <input type="text" name="title" id="postTitle" value="{{PostTitle}}">
+    </div>
+    <div>
+        <label for="name">PostBody: </label>
+        <textarea name="postBody" rows="10" cols="30" id="postBody">{{PostBody}}</textarea>
+    </div>
+    <div>
+        <button type=" submit " id="submitButton ">Update Post</button>
+    </div>
+</form>
+
+<div>
+    <button onclick="onDelete() " id="deleteButton ">Delete Post</button>
+</div>
